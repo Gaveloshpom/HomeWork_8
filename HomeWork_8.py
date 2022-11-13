@@ -12,8 +12,8 @@ def get_birthdays_per_week(employee_list: list):
 
     result = {}
 
-    for i in employee_list:
-        employee_birthday = i["birthday"] #беремо ДР працівника
+    for user in employee_list:
+        employee_birthday = user["birthday"] #беремо ДР працівника
         employee_birthday = datetime(year=datetime.now().year, month=employee_birthday.month, day=employee_birthday.day)
         one_week_checker = (employee_birthday - datetime.now()).days
 
@@ -23,7 +23,7 @@ def get_birthdays_per_week(employee_list: list):
         if employee_birthday.strftime("%A") in ("Saturday", "Sunday"):
             employee_birthday = weekend_check(employee_birthday)
 
-        result.setdefault((employee_birthday.strftime("%A"), employee_birthday.date()), []).append(i["name"])
+        result.setdefault((employee_birthday.strftime("%A"), employee_birthday.date()), []).append(user["name"])
     no_name(result=result)
 def weekend_check(birthday_date): #Переносимо ДР з вихідних на робочий день
     if birthday_date.strftime("%A") == "Saturday":
